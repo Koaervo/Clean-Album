@@ -36,12 +36,12 @@ func (r *GormAlbumRepository) Delete(id int64) error {
 
 func (r *GormAlbumRepository) GetAllAlbums() ([]entity.Album, error) {
 	var album []entity.Album
-	err := r.db.Find(&album).Error
+	err := r.db.Preload("Songs").Find(&album).Error
 	return album, err
 }
 
 func (r *GormAlbumRepository) GetAlbumById(id int64) (entity.Album, error) {
 	var album entity.Album
-	err := r.db.Where("id = ?", id).Find(&album).Error
+	err := r.db.Preload("Songs").Where("id = ?", id).Find(&album).Error
 	return album, err
 }
