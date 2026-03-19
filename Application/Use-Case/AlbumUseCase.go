@@ -27,7 +27,11 @@ func (as *AlbumService) Update(album entity.Album) error {
 }
 
 func (as *AlbumService) Delete(id int64) error {
-	return as.repo.Delete(id)
+	var album entity.Album
+
+	album.IsDelete = false
+
+	return as.repo.Update(album)
 }
 
 func (as *AlbumService) GetAllAlbums() ([]entity.Album, error) {

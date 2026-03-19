@@ -5,7 +5,7 @@ import "time"
 const TableNameAlbum = "public.Album"
 
 type Album struct {
-	Id          int       `gorm:"column:Id" json:"id"`
+	Id          int       `gorm:"column:Id;primaryKey;autoIncrement" json:"id"`
 	Name        string    `gorm:"column:Name" json:"name"`
 	FileId      int       `gorm:"column:FileId" json:"fileId"`
 	Description string    `gorm:"column:Description" json:"description"`

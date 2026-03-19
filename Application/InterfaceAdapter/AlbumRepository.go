@@ -16,22 +16,15 @@ func NewGormAlbumRepository(db *gorm.DB) usecase.AlbumRepository {
 }
 
 func (r *GormAlbumRepository) Create(album entity.Album) error {
-	return r.db.Create(album).Error
+	return r.db.Create(&album).Error
 }
 
 func (r *GormAlbumRepository) Update(album entity.Album) error {
-	return r.db.Save(album).Error
+	return r.db.Save(&album).Error
 }
 
-func (r *GormAlbumRepository) Delete(id int64) error {
-	var album entity.Album
-
-	if err := r.db.Where("id = ?", id).Find(&album).Error; err != nil {
-		return err
-	}
-
-	album.IsDelete = true
-	return r.db.Save(album).Error
+func (r *GormAlbumRepository) Delete(album entity.Album) error {
+	return r.db.Delete(&album).Error
 }
 
 func (r *GormAlbumRepository) GetAllAlbums() ([]entity.Album, error) {
