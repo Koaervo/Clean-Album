@@ -29,7 +29,7 @@ func (as *AlbumService) Update(album entity.Album) error {
 func (as *AlbumService) Delete(id int64) error {
 	var album entity.Album
 
-	album.IsDelete = false
+	album.IsDelete = true
 
 	return as.repo.Update(album)
 }
